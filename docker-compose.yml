@@ -1,0 +1,29 @@
+services:
+
+  postgres:
+    image: postgres:15.1
+    environment:
+      - "POSTGRES_PASSWORD=postgres"
+      - "PGUSER=postgres"
+    ports:
+      - 5432:5432
+    healthcheck:
+      test: ["CMD", "pg_isready"]
+      start_period: 3s
+      interval: 1s
+      timeout: 2s
+      retries: 40
+
+  atlasdev:
+    image: postgres:15.1
+    environment:
+      - "POSTGRES_PASSWORD=postgres"
+      - "PGUSER=postgres"
+    ports:
+      - 5433:5432
+
+  migrations:
+    build: .
+    depends_on:
+      postgres:
+        condition: service_healthy
