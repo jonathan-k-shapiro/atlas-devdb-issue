@@ -1,0 +1,967 @@
+atlasdev-1  | The files belonging to this database system will be owned by user "postgres".
+atlasdev-1  | This user must also own the server process.
+atlasdev-1  | 
+atlasdev-1  | The database cluster will be initialized with locale "en_US.utf8".
+atlasdev-1  | The default database encoding has accordingly been set to "UTF8".
+atlasdev-1  | The default text search configuration will be set to "english".
+atlasdev-1  | 
+atlasdev-1  | Data page checksums are disabled.
+atlasdev-1  | 
+atlasdev-1  | fixing permissions on existing directory /var/lib/postgresql/data ... ok
+atlasdev-1  | creating subdirectories ... ok
+atlasdev-1  | selecting dynamic shared memory implementation ... posix
+atlasdev-1  | selecting default max_connections ... 100
+atlasdev-1  | selecting default shared_buffers ... 128MB
+atlasdev-1  | selecting default time zone ... Etc/UTC
+atlasdev-1  | creating configuration files ... ok
+atlasdev-1  | running bootstrap script ... ok
+atlasdev-1  | performing post-bootstrap initialization ... ok
+atlasdev-1  | syncing data to disk ... ok
+atlasdev-1  | 
+atlasdev-1  | 
+atlasdev-1  | Success. You can now start the database server using:
+atlasdev-1  | initdb: warning: enabling "trust" authentication for local connections
+atlasdev-1  | initdb: hint: You can change this by editing pg_hba.conf or using the option -A, or --auth-local and --auth-host, the next time you run initdb.
+atlasdev-1  | 
+atlasdev-1  |     pg_ctl -D /var/lib/postgresql/data -l logfile start
+atlasdev-1  | 
+atlasdev-1  | waiting for server to start....2025-03-17 23:07:43.652 UTC [48] LOG:  starting PostgreSQL 15.1 (Debian 15.1-1.pgdg110+1) on aarch64-unknown-linux-gnu, compiled by gcc (Debian 10.2.1-6) 10.2.1 20210110, 64-bit
+atlasdev-1  | 2025-03-17 23:07:43.653 UTC [48] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+atlasdev-1  | 2025-03-17 23:07:43.656 UTC [51] LOG:  database system was shut down at 2025-03-17 23:07:43 UTC
+atlasdev-1  | 2025-03-17 23:07:43.659 UTC [48] LOG:  database system is ready to accept connections
+atlasdev-1  |  done
+atlasdev-1  | server started
+atlasdev-1  | 2025-03-17 23:07:43.792 UTC [57] LOG:  statement: SELECT 1 FROM pg_database WHERE datname = 'postgres' ;
+atlasdev-1  | 
+atlasdev-1  | /usr/local/bin/docker-entrypoint.sh: sourcing /docker-entrypoint-initdb.d/initdb.sh
+atlasdev-1  | putting pg_hba in place
+atlasdev-1  | 2025-03-17 23:07:43.837 UTC [60] LOG:  statement: SELECT pg_reload_conf()
+atlasdev-1  | 2025-03-17 23:07:43.838 UTC [48] LOG:  received SIGHUP, reloading configuration files
+atlasdev-1  |  pg_reload_conf 
+atlasdev-1  | ----------------
+atlasdev-1  |  t
+atlasdev-1  | (1 row)
+atlasdev-1  | 
+atlasdev-1  | creating users and database
+atlasdev-1  | 2025-03-17 23:07:43.838 UTC [48] LOG:  parameter "listen_addresses" cannot be changed without restarting the server
+atlasdev-1  | 2025-03-17 23:07:43.838 UTC [48] LOG:  configuration file "/var/lib/postgresql/data/postgresql.conf" contains errors; unaffected changes were applied
+atlasdev-1  | 2025-03-17 23:07:43.851 UTC [62] LOG:  statement: CREATE ROLE myowner LOGIN;
+atlasdev-1  | 2025-03-17 23:07:43.851 UTC [62] LOG:  statement: CREATE ROLE myuser LOGIN ENCRYPTED PASSWORD 'logmein';
+atlasdev-1  | 2025-03-17 23:07:43.853 UTC [62] LOG:  statement: ALTER USER myowner SET search_path = myschema,public;
+atlasdev-1  | 2025-03-17 23:07:43.854 UTC [62] LOG:  statement: ALTER USER myuser SET search_path = myschema,public;
+atlasdev-1  | 2025-03-17 23:07:43.854 UTC [62] LOG:  statement: CREATE DATABASE mydb WITH ENCODING 'UTF8' owner = myowner LC_COLLATE='en_US.UTF-8' LC_CTYPE='en_US.UTF-8' TEMPLATE=template0;
+atlasdev-1  | creating schema and extensions
+atlasdev-1  | 2025-03-17 23:07:43.889 UTC [64] LOG:  statement: CREATE SCHEMA myschema;
+atlasdev-1  | 2025-03-17 23:07:43.890 UTC [64] LOG:  statement: ALTER SCHEMA myschema OWNER TO myowner;
+atlasdev-1  | 2025-03-17 23:07:43.890 UTC [64] LOG:  statement: GRANT USAGE ON SCHEMA myschema TO myuser;
+atlasdev-1  | 
+atlasdev-1  | 2025-03-17 23:07:43.891 UTC [48] LOG:  received fast shutdown request
+atlasdev-1  | waiting for server to shut down....2025-03-17 23:07:43.891 UTC [48] LOG:  aborting any active transactions
+atlasdev-1  | 2025-03-17 23:07:43.892 UTC [48] LOG:  background worker "logical replication launcher" (PID 54) exited with exit code 1
+atlasdev-1  | 2025-03-17 23:07:43.892 UTC [49] LOG:  shutting down
+atlasdev-1  | 2025-03-17 23:07:43.893 UTC [49] LOG:  checkpoint starting: shutdown immediate
+atlasdev-1  | 2025-03-17 23:07:43.923 UTC [49] LOG:  checkpoint complete: wrote 930 buffers (5.7%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.007 s, sync=0.022 s, total=0.032 s; sync files=259, longest=0.015 s, average=0.001 s; distance=4223 kB, estimate=4223 kB
+atlasdev-1  | 2025-03-17 23:07:43.926 UTC [48] LOG:  database system is shut down
+atlasdev-1  |  done
+atlasdev-1  | server stopped
+atlasdev-1  | 
+atlasdev-1  | PostgreSQL init process complete; ready for start up.
+atlasdev-1  | 
+atlasdev-1  | 2025-03-17 23:07:44.002 UTC [1] LOG:  starting PostgreSQL 15.1 (Debian 15.1-1.pgdg110+1) on aarch64-unknown-linux-gnu, compiled by gcc (Debian 10.2.1-6) 10.2.1 20210110, 64-bit
+atlasdev-1  | 2025-03-17 23:07:44.003 UTC [1] LOG:  listening on IPv4 address "0.0.0.0", port 5432
+atlasdev-1  | 2025-03-17 23:07:44.003 UTC [1] LOG:  listening on IPv6 address "::", port 5432
+atlasdev-1  | 2025-03-17 23:07:44.004 UTC [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+atlasdev-1  | 2025-03-17 23:07:44.006 UTC [69] LOG:  database system was shut down at 2025-03-17 23:07:43 UTC
+atlasdev-1  | 2025-03-17 23:07:44.018 UTC [1] LOG:  database system is ready to accept connections
+atlasdev-1  | 2025-03-17 23:07:47.822 UTC [1] LOG:  received fast shutdown request
+atlasdev-1  | 2025-03-17 23:07:47.824 UTC [1] LOG:  aborting any active transactions
+atlasdev-1  | 2025-03-17 23:07:47.825 UTC [1] LOG:  background worker "logical replication launcher" (PID 72) exited with exit code 1
+atlasdev-1  | 2025-03-17 23:07:47.825 UTC [67] LOG:  shutting down
+atlasdev-1  | 2025-03-17 23:07:47.827 UTC [67] LOG:  checkpoint starting: shutdown immediate
+atlasdev-1  | 2025-03-17 23:07:47.832 UTC [67] LOG:  checkpoint complete: wrote 3 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.002 s, sync=0.001 s, total=0.007 s; sync files=2, longest=0.001 s, average=0.001 s; distance=0 kB, estimate=0 kB
+atlasdev-1  | 2025-03-17 23:07:47.834 UTC [1] LOG:  database system is shut down
+atlasdev-1  | 
+atlasdev-1  | PostgreSQL Database directory appears to contain a database; Skipping initialization
+atlasdev-1  | 
+atlasdev-1  | 2025-03-17 23:07:51.243 UTC [1] LOG:  starting PostgreSQL 15.1 (Debian 15.1-1.pgdg110+1) on aarch64-unknown-linux-gnu, compiled by gcc (Debian 10.2.1-6) 10.2.1 20210110, 64-bit
+atlasdev-1  | 2025-03-17 23:07:51.243 UTC [1] LOG:  listening on IPv4 address "0.0.0.0", port 5432
+atlasdev-1  | 2025-03-17 23:07:51.243 UTC [1] LOG:  listening on IPv6 address "::", port 5432
+atlasdev-1  | 2025-03-17 23:07:51.244 UTC [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+atlasdev-1  | 2025-03-17 23:07:51.246 UTC [29] LOG:  database system was shut down at 2025-03-17 23:07:47 UTC
+atlasdev-1  | 2025-03-17 23:07:51.249 UTC [1] LOG:  database system is ready to accept connections
+atlasdev-1  | 2025-03-17 23:08:02.466 UTC [33] LOG:  statement: SELECT setting FROM pg_settings WHERE name IN ('server_version_num', 'crdb_version') ORDER BY name DESC
+atlasdev-1  | 2025-03-17 23:08:02.471 UTC [33] LOG:  execute <unnamed>: SELECT pg_try_advisory_lock($1)
+atlasdev-1  | 2025-03-17 23:08:02.471 UTC [33] DETAIL:  parameters: $1 = '361947982'
+atlasdev-1  | 2025-03-17 23:08:02.479 UTC [34] LOG:  execute <unnamed>: 
+atlasdev-1  | 	SELECT
+atlasdev-1  | 		nspname AS schema_name,
+atlasdev-1  | 		pg_catalog.obj_description(ns.oid) AS comment
+atlasdev-1  | 	FROM
+atlasdev-1  | 		pg_catalog.pg_namespace ns
+atlasdev-1  | 		LEFT JOIN pg_depend AS dep ON dep.classid = 'pg_catalog.pg_namespace'::regclass::oid AND dep.objid = ns.oid AND dep.deptype = 'e'
+atlasdev-1  | 	WHERE
+atlasdev-1  | 		nspname = $1
+atlasdev-1  | 		AND dep.objid IS NULL
+atlasdev-1  | 	ORDER BY
+atlasdev-1  | 	    nspname
+atlasdev-1  | 2025-03-17 23:08:02.479 UTC [34] DETAIL:  parameters: $1 = 'myschema'
+atlasdev-1  | 2025-03-17 23:08:02.480 UTC [34] LOG:  execute <unnamed>: 
+atlasdev-1  | 	SELECT
+atlasdev-1  | 		n.nspname AS schema_name,
+atlasdev-1  | 		e.enumtypid AS enum_id,
+atlasdev-1  | 		t.typname AS enum_name,
+atlasdev-1  | 		e.enumlabel AS enum_value
+atlasdev-1  | 	FROM
+atlasdev-1  | 		pg_enum e
+atlasdev-1  | 		JOIN pg_type t ON e.enumtypid = t.oid
+atlasdev-1  | 		JOIN pg_namespace n ON t.typnamespace = n.oid
+atlasdev-1  | 	WHERE
+atlasdev-1  | 	    n.nspname IN ($1)
+atlasdev-1  | 	ORDER BY
+atlasdev-1  | 	    n.nspname, e.enumtypid, e.enumsortorder
+atlasdev-1  | 	
+atlasdev-1  | 2025-03-17 23:08:02.480 UTC [34] DETAIL:  parameters: $1 = 'myschema'
+atlasdev-1  | 2025-03-17 23:08:02.484 UTC [34] LOG:  execute <unnamed>: 
+atlasdev-1  | 	SELECT
+atlasdev-1  | 		t3.oid,
+atlasdev-1  | 		t1.table_schema,
+atlasdev-1  | 		t1.table_name,
+atlasdev-1  | 		pg_catalog.obj_description(t3.oid, 'pg_class') AS comment,
+atlasdev-1  | 		t4.partattrs AS partition_attrs,
+atlasdev-1  | 		t4.partstrat AS partition_strategy,
+atlasdev-1  | 		pg_get_expr(t4.partexprs, t4.partrelid) AS partition_exprs,
+atlasdev-1  | 		json_build_object('row_security', t3.relrowsecurity, 'force_row_security', t3.relforcerowsecurity) AS attrs
+atlasdev-1  | 	FROM
+atlasdev-1  | 		INFORMATION_SCHEMA.TABLES AS t1
+atlasdev-1  | 		JOIN pg_catalog.pg_namespace AS t2 ON t2.nspname = t1.table_schema
+atlasdev-1  | 		JOIN pg_catalog.pg_class AS t3 ON t3.relnamespace = t2.oid AND t3.relname = t1.table_name
+atlasdev-1  | 		LEFT JOIN pg_catalog.pg_partitioned_table AS t4 ON t4.partrelid = t3.oid
+atlasdev-1  | 		LEFT JOIN pg_depend AS t5 ON t5.classid = 'pg_catalog.pg_class'::regclass::oid AND t5.objid = t3.oid AND t5.deptype = 'e'
+atlasdev-1  | 	WHERE
+atlasdev-1  | 		t1.table_type = 'BASE TABLE'
+atlasdev-1  | 		AND NOT COALESCE(t3.relispartition, false)
+atlasdev-1  | 		AND t1.table_schema IN ($1)
+atlasdev-1  | 		AND t5.objid IS NULL
+atlasdev-1  | 	ORDER BY
+atlasdev-1  | 		t1.table_schema, t1.table_name
+atlasdev-1  | 	
+atlasdev-1  | 2025-03-17 23:08:02.484 UTC [34] DETAIL:  parameters: $1 = 'myschema'
+atlasdev-1  | 2025-03-17 23:08:02.486 UTC [34] LOG:  execute <unnamed>: 
+atlasdev-1  | 	SELECT
+atlasdev-1  | 		nspname AS schema_name,
+atlasdev-1  | 		pg_catalog.obj_description(ns.oid) AS comment
+atlasdev-1  | 	FROM
+atlasdev-1  | 		pg_catalog.pg_namespace ns
+atlasdev-1  | 		LEFT JOIN pg_depend AS dep ON dep.classid = 'pg_catalog.pg_namespace'::regclass::oid AND dep.objid = ns.oid AND dep.deptype = 'e'
+atlasdev-1  | 	WHERE
+atlasdev-1  | 		nspname = $1
+atlasdev-1  | 		AND dep.objid IS NULL
+atlasdev-1  | 	ORDER BY
+atlasdev-1  | 	    nspname
+atlasdev-1  | 2025-03-17 23:08:02.486 UTC [34] DETAIL:  parameters: $1 = 'myschema'
+atlasdev-1  | 2025-03-17 23:08:02.487 UTC [34] LOG:  execute <unnamed>: 
+atlasdev-1  | 	SELECT
+atlasdev-1  | 		n.nspname AS schema_name,
+atlasdev-1  | 		e.enumtypid AS enum_id,
+atlasdev-1  | 		t.typname AS enum_name,
+atlasdev-1  | 		e.enumlabel AS enum_value
+atlasdev-1  | 	FROM
+atlasdev-1  | 		pg_enum e
+atlasdev-1  | 		JOIN pg_type t ON e.enumtypid = t.oid
+atlasdev-1  | 		JOIN pg_namespace n ON t.typnamespace = n.oid
+atlasdev-1  | 	WHERE
+atlasdev-1  | 	    n.nspname IN ($1)
+atlasdev-1  | 	ORDER BY
+atlasdev-1  | 	    n.nspname, e.enumtypid, e.enumsortorder
+atlasdev-1  | 	
+atlasdev-1  | 2025-03-17 23:08:02.487 UTC [34] DETAIL:  parameters: $1 = 'myschema'
+atlasdev-1  | 2025-03-17 23:08:02.488 UTC [34] LOG:  execute <unnamed>: 
+atlasdev-1  | 	SELECT
+atlasdev-1  | 		t3.oid,
+atlasdev-1  | 		t1.table_schema,
+atlasdev-1  | 		t1.table_name,
+atlasdev-1  | 		pg_catalog.obj_description(t3.oid, 'pg_class') AS comment,
+atlasdev-1  | 		t4.partattrs AS partition_attrs,
+atlasdev-1  | 		t4.partstrat AS partition_strategy,
+atlasdev-1  | 		pg_get_expr(t4.partexprs, t4.partrelid) AS partition_exprs,
+atlasdev-1  | 		json_build_object('row_security', t3.relrowsecurity, 'force_row_security', t3.relforcerowsecurity) AS attrs
+atlasdev-1  | 	FROM
+atlasdev-1  | 		INFORMATION_SCHEMA.TABLES AS t1
+atlasdev-1  | 		JOIN pg_catalog.pg_namespace AS t2 ON t2.nspname = t1.table_schema
+atlasdev-1  | 		JOIN pg_catalog.pg_class AS t3 ON t3.relnamespace = t2.oid AND t3.relname = t1.table_name
+atlasdev-1  | 		LEFT JOIN pg_catalog.pg_partitioned_table AS t4 ON t4.partrelid = t3.oid
+atlasdev-1  | 		LEFT JOIN pg_depend AS t5 ON t5.classid = 'pg_catalog.pg_class'::regclass::oid AND t5.objid = t3.oid AND t5.deptype = 'e'
+atlasdev-1  | 	WHERE
+atlasdev-1  | 		t1.table_type = 'BASE TABLE'
+atlasdev-1  | 		AND NOT COALESCE(t3.relispartition, false)
+atlasdev-1  | 		AND t1.table_schema IN ($1)
+atlasdev-1  | 		AND t5.objid IS NULL
+atlasdev-1  | 	ORDER BY
+atlasdev-1  | 		t1.table_schema, t1.table_name
+atlasdev-1  | 	
+atlasdev-1  | 2025-03-17 23:08:02.488 UTC [34] DETAIL:  parameters: $1 = 'myschema'
+atlasdev-1  | 2025-03-17 23:08:02.489 UTC [34] LOG:  statement: CREATE DOMAIN verification_status AS TEXT CHECK (VALUE IN ('verified', 'unverified'));
+atlasdev-1  | 2025-03-17 23:08:02.490 UTC [34] LOG:  statement: CREATE TABLE users (
+atlasdev-1  | 	    id BIGINT GENERATED ALWAYS AS IDENTITY,
+atlasdev-1  | 	    firstname TEXT NOT NULL,
+atlasdev-1  | 	    email TEXT NOT NULL UNIQUE,
+atlasdev-1  | 	    verification_status verification_status NOT NULL DEFAULT 'unverified'
+atlasdev-1  | 	);
+atlasdev-1  | 2025-03-17 23:08:02.494 UTC [34] LOG:  statement: 
+atlasdev-1  | 	SELECT
+atlasdev-1  | 		nspname AS schema_name,
+atlasdev-1  | 		pg_catalog.obj_description(ns.oid) AS comment
+atlasdev-1  | 	FROM
+atlasdev-1  | 		pg_catalog.pg_namespace ns
+atlasdev-1  | 		LEFT JOIN pg_depend AS dep ON dep.classid = 'pg_catalog.pg_namespace'::regclass::oid AND dep.objid = ns.oid AND dep.deptype = 'e'
+atlasdev-1  | 	WHERE
+atlasdev-1  | 		nspname = CURRENT_SCHEMA()
+atlasdev-1  | 		AND dep.objid IS NULL
+atlasdev-1  | 	ORDER BY
+atlasdev-1  | 	    nspname
+atlasdev-1  | 2025-03-17 23:08:02.496 UTC [34] LOG:  execute <unnamed>: 
+atlasdev-1  | 	SELECT
+atlasdev-1  | 		n.nspname AS schema_name,
+atlasdev-1  | 		e.enumtypid AS enum_id,
+atlasdev-1  | 		t.typname AS enum_name,
+atlasdev-1  | 		e.enumlabel AS enum_value
+atlasdev-1  | 	FROM
+atlasdev-1  | 		pg_enum e
+atlasdev-1  | 		JOIN pg_type t ON e.enumtypid = t.oid
+atlasdev-1  | 		JOIN pg_namespace n ON t.typnamespace = n.oid
+atlasdev-1  | 	WHERE
+atlasdev-1  | 	    n.nspname IN ($1)
+atlasdev-1  | 	ORDER BY
+atlasdev-1  | 	    n.nspname, e.enumtypid, e.enumsortorder
+atlasdev-1  | 	
+atlasdev-1  | 2025-03-17 23:08:02.496 UTC [34] DETAIL:  parameters: $1 = 'myschema'
+atlasdev-1  | 2025-03-17 23:08:02.497 UTC [34] LOG:  execute <unnamed>: 
+atlasdev-1  | 	SELECT
+atlasdev-1  | 		t3.oid,
+atlasdev-1  | 		t1.table_schema,
+atlasdev-1  | 		t1.table_name,
+atlasdev-1  | 		pg_catalog.obj_description(t3.oid, 'pg_class') AS comment,
+atlasdev-1  | 		t4.partattrs AS partition_attrs,
+atlasdev-1  | 		t4.partstrat AS partition_strategy,
+atlasdev-1  | 		pg_get_expr(t4.partexprs, t4.partrelid) AS partition_exprs,
+atlasdev-1  | 		json_build_object('row_security', t3.relrowsecurity, 'force_row_security', t3.relforcerowsecurity) AS attrs
+atlasdev-1  | 	FROM
+atlasdev-1  | 		INFORMATION_SCHEMA.TABLES AS t1
+atlasdev-1  | 		JOIN pg_catalog.pg_namespace AS t2 ON t2.nspname = t1.table_schema
+atlasdev-1  | 		JOIN pg_catalog.pg_class AS t3 ON t3.relnamespace = t2.oid AND t3.relname = t1.table_name
+atlasdev-1  | 		LEFT JOIN pg_catalog.pg_partitioned_table AS t4 ON t4.partrelid = t3.oid
+atlasdev-1  | 		LEFT JOIN pg_depend AS t5 ON t5.classid = 'pg_catalog.pg_class'::regclass::oid AND t5.objid = t3.oid AND t5.deptype = 'e'
+atlasdev-1  | 	WHERE
+atlasdev-1  | 		t1.table_type = 'BASE TABLE'
+atlasdev-1  | 		AND NOT COALESCE(t3.relispartition, false)
+atlasdev-1  | 		AND t1.table_schema IN ($1)
+atlasdev-1  | 		AND t5.objid IS NULL
+atlasdev-1  | 	ORDER BY
+atlasdev-1  | 		t1.table_schema, t1.table_name
+atlasdev-1  | 	
+atlasdev-1  | 2025-03-17 23:08:02.497 UTC [34] DETAIL:  parameters: $1 = 'myschema'
+atlasdev-1  | 2025-03-17 23:08:02.504 UTC [34] LOG:  execute <unnamed>: 
+atlasdev-1  | 	SELECT
+atlasdev-1  | 		t1.table_name,
+atlasdev-1  | 		t1.column_name,
+atlasdev-1  | 		t1.data_type,
+atlasdev-1  | 		pg_catalog.format_type(a.atttypid, a.atttypmod) AS format_type,
+atlasdev-1  | 		t1.is_nullable,
+atlasdev-1  | 		t1.column_default,
+atlasdev-1  | 		t1.character_maximum_length,
+atlasdev-1  | 		t1.numeric_precision,
+atlasdev-1  | 		t1.datetime_precision,
+atlasdev-1  | 		t1.numeric_scale,
+atlasdev-1  | 		t1.interval_type,
+atlasdev-1  | 		t1.character_set_name,
+atlasdev-1  | 		t1.collation_name,
+atlasdev-1  | 		t1.is_identity,
+atlasdev-1  | 		t1.identity_start,
+atlasdev-1  | 		t1.identity_increment,
+atlasdev-1  | 		(CASE WHEN t1.is_identity = 'YES' THEN (SELECT last_value FROM pg_sequences WHERE quote_ident(schemaname) || '.' || quote_ident(sequencename) = pg_get_serial_sequence(quote_ident(t1.table_schema) || '.' || quote_ident(t1.table_name), t1.column_name)) END) AS identity_last,
+atlasdev-1  | 		t1.identity_generation,
+atlasdev-1  | 		t1.generation_expression,
+atlasdev-1  | 		col_description(t3.oid, "ordinal_position") AS comment,
+atlasdev-1  | 		t4.typtype,
+atlasdev-1  | 		t4.typelem,
+atlasdev-1  | 		t4.oid
+atlasdev-1  | 	FROM
+atlasdev-1  | 		"information_schema"."columns" AS t1
+atlasdev-1  | 		JOIN pg_catalog.pg_namespace AS t2 ON t2.nspname = t1.table_schema
+atlasdev-1  | 		JOIN pg_catalog.pg_class AS t3 ON t3.relnamespace = t2.oid AND t3.relname = t1.table_name
+atlasdev-1  | 		JOIN pg_catalog.pg_attribute AS a ON a.attrelid = t3.oid AND a.attname = t1.column_name
+atlasdev-1  | 		LEFT JOIN pg_catalog.pg_type AS t4 ON t4.oid = a.atttypid
+atlasdev-1  | 	WHERE
+atlasdev-1  | 		t1.table_schema = $1 AND t1.table_name IN ($2)
+atlasdev-1  | 	ORDER BY
+atlasdev-1  | 		t1.table_name, t1.ordinal_position
+atlasdev-1  | 	
+atlasdev-1  | 2025-03-17 23:08:02.504 UTC [34] DETAIL:  parameters: $1 = 'myschema', $2 = 'users'
+atlasdev-1  | 2025-03-17 23:08:02.507 UTC [34] LOG:  execute <unnamed>: 
+atlasdev-1  | 	SELECT
+atlasdev-1  | 		t.relname AS table_name,
+atlasdev-1  | 		i.relname AS index_name,
+atlasdev-1  | 		am.amname AS index_type,
+atlasdev-1  | 		a.attname AS column_name,
+atlasdev-1  | 		(a.attname <> '' AND idx.indnatts > idx.indnkeyatts AND idx.ord > idx.indnkeyatts) AS included,
+atlasdev-1  | 		idx.indisprimary AS primary,
+atlasdev-1  | 		idx.indisunique AS unique,
+atlasdev-1  | 		(CASE WHEN idx.indisexclusion THEN (SELECT conexclop[idx.ord]::regoper FROM pg_constraint WHERE conindid = idx.indexrelid) END) AS excoper,
+atlasdev-1  | 		con.nameconsts AS constraints,
+atlasdev-1  | 		pg_get_expr(idx.indpred, idx.indrelid) AS predicate,
+atlasdev-1  | 		pg_get_indexdef(idx.indexrelid, idx.ord, false) AS expression,
+atlasdev-1  | 		pg_index_column_has_property(idx.indexrelid, idx.ord, 'desc') AS isdesc,
+atlasdev-1  | 		pg_index_column_has_property(idx.indexrelid, idx.ord, 'nulls_first') AS nulls_first,
+atlasdev-1  | 		pg_index_column_has_property(idx.indexrelid, idx.ord, 'nulls_last') AS nulls_last,
+atlasdev-1  | 		obj_description(i.oid, 'pg_class') AS comment,
+atlasdev-1  | 		i.reloptions AS options,
+atlasdev-1  | 		op.opcname AS opclass_name,
+atlasdev-1  | 		op.opcnamespace::regnamespace::text AS opclass_schema,
+atlasdev-1  | 		op.opcdefault AS opclass_default,
+atlasdev-1  | 		a2.attoptions AS opclass_params,
+atlasdev-1  | 	    idx.indnullsnotdistinct AS indnullsnotdistinct
+atlasdev-1  | 	FROM
+atlasdev-1  | 		(
+atlasdev-1  | 			select
+atlasdev-1  | 				*,
+atlasdev-1  | 				generate_series(1,array_length(i.indkey,1)) as ord,
+atlasdev-1  | 				unnest(i.indkey) AS key
+atlasdev-1  | 			from pg_index i
+atlasdev-1  | 		) idx
+atlasdev-1  | 		JOIN pg_class i ON i.oid = idx.indexrelid
+atlasdev-1  | 		JOIN pg_class t ON t.oid = idx.indrelid
+atlasdev-1  | 		JOIN pg_namespace n ON n.oid = t.relnamespace
+atlasdev-1  | 		LEFT JOIN (
+atlasdev-1  | 		    select
+atlasdev-1  | 		    	conindid,
+atlasdev-1  | 				jsonb_object_agg(conname, jsonb_build_object('contype', contype, 'condeferrable', condeferrable, 'condeferred', condeferred)) AS nameconsts
+atlasdev-1  | 		    from pg_constraint
+atlasdev-1  | 		    group by conindid
+atlasdev-1  | 		) con ON con.conindid = idx.indexrelid
+atlasdev-1  | 		LEFT JOIN pg_attribute a ON (a.attrelid, a.attnum) = (idx.indrelid, idx.key)
+atlasdev-1  | 		JOIN pg_am am ON am.oid = i.relam
+atlasdev-1  | 		LEFT JOIN pg_opclass op ON op.oid = idx.indclass[idx.ord-1]
+atlasdev-1  | 		LEFT JOIN pg_attribute a2 ON (a2.attrelid, a2.attnum) = (idx.indexrelid, idx.ord)
+atlasdev-1  | 	WHERE
+atlasdev-1  | 		n.nspname = $1
+atlasdev-1  | 		AND t.relname IN ($2)
+atlasdev-1  | 	ORDER BY
+atlasdev-1  | 		table_name, index_name, idx.ord
+atlasdev-1  | 	
+atlasdev-1  | 2025-03-17 23:08:02.507 UTC [34] DETAIL:  parameters: $1 = 'myschema', $2 = 'users'
+atlasdev-1  | 2025-03-17 23:08:02.508 UTC [34] LOG:  execute <unnamed>: 
+atlasdev-1  | 	SELECT 
+atlasdev-1  | 	    fk.constraint_name,
+atlasdev-1  | 	    fk.table_name,
+atlasdev-1  | 	    a1.attname AS column_name,
+atlasdev-1  | 	    fk.schema_name,
+atlasdev-1  | 	    fk.referenced_table_name,
+atlasdev-1  | 	    a2.attname AS referenced_column_name,
+atlasdev-1  | 	    fk.referenced_schema_name,
+atlasdev-1  | 	    fk.confupdtype,
+atlasdev-1  | 	    fk.confdeltype,
+atlasdev-1  | 	    fk.condeferrable,
+atlasdev-1  | 	    fk.condeferred
+atlasdev-1  | 		FROM 
+atlasdev-1  | 		    (
+atlasdev-1  | 		    	SELECT
+atlasdev-1  | 		      		con.conname AS constraint_name,
+atlasdev-1  | 		      		con.conrelid,
+atlasdev-1  | 		      		con.confrelid,
+atlasdev-1  | 		      		t1.relname AS table_name,
+atlasdev-1  | 		      		ns1.nspname AS schema_name,
+atlasdev-1  | 	      			t2.relname AS referenced_table_name,
+atlasdev-1  | 		      		ns2.nspname AS referenced_schema_name,
+atlasdev-1  | 		      		generate_series(1,array_length(con.conkey,1)) as ord,
+atlasdev-1  | 		      		unnest(con.conkey) AS conkey,
+atlasdev-1  | 		      		unnest(con.confkey) AS confkey,
+atlasdev-1  | 		      		con.confupdtype,
+atlasdev-1  | 		      		con.confdeltype,
+atlasdev-1  | 		      		con.condeferrable,
+atlasdev-1  | 		      		con.condeferred
+atlasdev-1  | 		    	FROM pg_constraint con
+atlasdev-1  | 		    	JOIN pg_class t1 ON t1.oid = con.conrelid
+atlasdev-1  | 		    	JOIN pg_class t2 ON t2.oid = con.confrelid
+atlasdev-1  | 		    	JOIN pg_namespace ns1 on t1.relnamespace = ns1.oid
+atlasdev-1  | 		    	JOIN pg_namespace ns2 on t2.relnamespace = ns2.oid
+atlasdev-1  | 		    	WHERE ns1.nspname = $1
+atlasdev-1  | 		    	AND t1.relname IN ($2)
+atlasdev-1  | 		    	AND con.contype = 'f'
+atlasdev-1  | 		) AS fk
+atlasdev-1  | 		JOIN pg_attribute a1 ON a1.attnum = fk.conkey AND a1.attrelid = fk.conrelid
+atlasdev-1  | 		JOIN pg_attribute a2 ON a2.attnum = fk.confkey AND a2.attrelid = fk.confrelid
+atlasdev-1  | 		ORDER BY
+atlasdev-1  | 		    fk.conrelid, fk.constraint_name, fk.ord
+atlasdev-1  | 	
+atlasdev-1  | 2025-03-17 23:08:02.508 UTC [34] DETAIL:  parameters: $1 = 'myschema', $2 = 'users'
+atlasdev-1  | 2025-03-17 23:08:02.509 UTC [34] LOG:  execute <unnamed>: 
+atlasdev-1  | 	SELECT
+atlasdev-1  | 		rel.relname AS table_name,
+atlasdev-1  | 		t1.conname AS constraint_name,
+atlasdev-1  | 		pg_get_expr(t1.conbin, t1.conrelid) as expression,
+atlasdev-1  | 		t2.attname as column_name,
+atlasdev-1  | 		t1.conkey as column_indexes,
+atlasdev-1  | 		t1.connoinherit as no_inherit
+atlasdev-1  | 	FROM
+atlasdev-1  | 		pg_constraint t1
+atlasdev-1  | 		JOIN pg_attribute t2
+atlasdev-1  | 		ON t2.attrelid = t1.conrelid
+atlasdev-1  | 		AND t2.attnum = ANY (t1.conkey)
+atlasdev-1  | 		JOIN pg_class rel
+atlasdev-1  | 		ON rel.oid = t1.conrelid
+atlasdev-1  | 		JOIN pg_namespace nsp
+atlasdev-1  | 		ON nsp.oid = t1.connamespace
+atlasdev-1  | 	WHERE
+atlasdev-1  | 		t1.contype = 'c'
+atlasdev-1  | 		AND nsp.nspname = $1
+atlasdev-1  | 		AND rel.relname IN ($2)
+atlasdev-1  | 	ORDER BY
+atlasdev-1  | 		t1.conname, array_position(t1.conkey, t2.attnum)
+atlasdev-1  | 	
+atlasdev-1  | 2025-03-17 23:08:02.509 UTC [34] DETAIL:  parameters: $1 = 'myschema', $2 = 'users'
+atlasdev-1  | 2025-03-17 23:08:02.510 UTC [34] LOG:  execute <unnamed>: 
+atlasdev-1  | 	SELECT
+atlasdev-1  | 		nspname AS schema_name,
+atlasdev-1  | 		pg_catalog.obj_description(ns.oid) AS comment
+atlasdev-1  | 	FROM
+atlasdev-1  | 		pg_catalog.pg_namespace ns
+atlasdev-1  | 		LEFT JOIN pg_depend AS dep ON dep.classid = 'pg_catalog.pg_namespace'::regclass::oid AND dep.objid = ns.oid AND dep.deptype = 'e'
+atlasdev-1  | 	WHERE
+atlasdev-1  | 		nspname = $1
+atlasdev-1  | 		AND dep.objid IS NULL
+atlasdev-1  | 	ORDER BY
+atlasdev-1  | 	    nspname
+atlasdev-1  | 2025-03-17 23:08:02.510 UTC [34] DETAIL:  parameters: $1 = 'myschema'
+atlasdev-1  | 2025-03-17 23:08:02.510 UTC [34] LOG:  execute <unnamed>: 
+atlasdev-1  | 	SELECT
+atlasdev-1  | 		n.nspname AS schema_name,
+atlasdev-1  | 		e.enumtypid AS enum_id,
+atlasdev-1  | 		t.typname AS enum_name,
+atlasdev-1  | 		e.enumlabel AS enum_value
+atlasdev-1  | 	FROM
+atlasdev-1  | 		pg_enum e
+atlasdev-1  | 		JOIN pg_type t ON e.enumtypid = t.oid
+atlasdev-1  | 		JOIN pg_namespace n ON t.typnamespace = n.oid
+atlasdev-1  | 	WHERE
+atlasdev-1  | 	    n.nspname IN ($1)
+atlasdev-1  | 	ORDER BY
+atlasdev-1  | 	    n.nspname, e.enumtypid, e.enumsortorder
+atlasdev-1  | 	
+atlasdev-1  | 2025-03-17 23:08:02.510 UTC [34] DETAIL:  parameters: $1 = 'myschema'
+atlasdev-1  | 2025-03-17 23:08:02.512 UTC [34] LOG:  execute <unnamed>: 
+atlasdev-1  | 	SELECT
+atlasdev-1  | 		t3.oid,
+atlasdev-1  | 		t1.table_schema,
+atlasdev-1  | 		t1.table_name,
+atlasdev-1  | 		pg_catalog.obj_description(t3.oid, 'pg_class') AS comment,
+atlasdev-1  | 		t4.partattrs AS partition_attrs,
+atlasdev-1  | 		t4.partstrat AS partition_strategy,
+atlasdev-1  | 		pg_get_expr(t4.partexprs, t4.partrelid) AS partition_exprs,
+atlasdev-1  | 		json_build_object('row_security', t3.relrowsecurity, 'force_row_security', t3.relforcerowsecurity) AS attrs
+atlasdev-1  | 	FROM
+atlasdev-1  | 		INFORMATION_SCHEMA.TABLES AS t1
+atlasdev-1  | 		JOIN pg_catalog.pg_namespace AS t2 ON t2.nspname = t1.table_schema
+atlasdev-1  | 		JOIN pg_catalog.pg_class AS t3 ON t3.relnamespace = t2.oid AND t3.relname = t1.table_name
+atlasdev-1  | 		LEFT JOIN pg_catalog.pg_partitioned_table AS t4 ON t4.partrelid = t3.oid
+atlasdev-1  | 		LEFT JOIN pg_depend AS t5 ON t5.classid = 'pg_catalog.pg_class'::regclass::oid AND t5.objid = t3.oid AND t5.deptype = 'e'
+atlasdev-1  | 	WHERE
+atlasdev-1  | 		t1.table_type = 'BASE TABLE'
+atlasdev-1  | 		AND NOT COALESCE(t3.relispartition, false)
+atlasdev-1  | 		AND t1.table_schema IN ($1)
+atlasdev-1  | 		AND t5.objid IS NULL
+atlasdev-1  | 	ORDER BY
+atlasdev-1  | 		t1.table_schema, t1.table_name
+atlasdev-1  | 	
+atlasdev-1  | 2025-03-17 23:08:02.512 UTC [34] DETAIL:  parameters: $1 = 'myschema'
+atlasdev-1  | 2025-03-17 23:08:02.516 UTC [34] LOG:  execute <unnamed>: 
+atlasdev-1  | 	SELECT
+atlasdev-1  | 		t1.table_name,
+atlasdev-1  | 		t1.column_name,
+atlasdev-1  | 		t1.data_type,
+atlasdev-1  | 		pg_catalog.format_type(a.atttypid, a.atttypmod) AS format_type,
+atlasdev-1  | 		t1.is_nullable,
+atlasdev-1  | 		t1.column_default,
+atlasdev-1  | 		t1.character_maximum_length,
+atlasdev-1  | 		t1.numeric_precision,
+atlasdev-1  | 		t1.datetime_precision,
+atlasdev-1  | 		t1.numeric_scale,
+atlasdev-1  | 		t1.interval_type,
+atlasdev-1  | 		t1.character_set_name,
+atlasdev-1  | 		t1.collation_name,
+atlasdev-1  | 		t1.is_identity,
+atlasdev-1  | 		t1.identity_start,
+atlasdev-1  | 		t1.identity_increment,
+atlasdev-1  | 		(CASE WHEN t1.is_identity = 'YES' THEN (SELECT last_value FROM pg_sequences WHERE quote_ident(schemaname) || '.' || quote_ident(sequencename) = pg_get_serial_sequence(quote_ident(t1.table_schema) || '.' || quote_ident(t1.table_name), t1.column_name)) END) AS identity_last,
+atlasdev-1  | 		t1.identity_generation,
+atlasdev-1  | 		t1.generation_expression,
+atlasdev-1  | 		col_description(t3.oid, "ordinal_position") AS comment,
+atlasdev-1  | 		t4.typtype,
+atlasdev-1  | 		t4.typelem,
+atlasdev-1  | 		t4.oid
+atlasdev-1  | 	FROM
+atlasdev-1  | 		"information_schema"."columns" AS t1
+atlasdev-1  | 		JOIN pg_catalog.pg_namespace AS t2 ON t2.nspname = t1.table_schema
+atlasdev-1  | 		JOIN pg_catalog.pg_class AS t3 ON t3.relnamespace = t2.oid AND t3.relname = t1.table_name
+atlasdev-1  | 		JOIN pg_catalog.pg_attribute AS a ON a.attrelid = t3.oid AND a.attname = t1.column_name
+atlasdev-1  | 		LEFT JOIN pg_catalog.pg_type AS t4 ON t4.oid = a.atttypid
+atlasdev-1  | 	WHERE
+atlasdev-1  | 		t1.table_schema = $1 AND t1.table_name IN ($2)
+atlasdev-1  | 	ORDER BY
+atlasdev-1  | 		t1.table_name, t1.ordinal_position
+atlasdev-1  | 	
+atlasdev-1  | 2025-03-17 23:08:02.516 UTC [34] DETAIL:  parameters: $1 = 'myschema', $2 = 'users'
+atlasdev-1  | 2025-03-17 23:08:02.518 UTC [34] LOG:  execute <unnamed>: 
+atlasdev-1  | 	SELECT
+atlasdev-1  | 		t.relname AS table_name,
+atlasdev-1  | 		i.relname AS index_name,
+atlasdev-1  | 		am.amname AS index_type,
+atlasdev-1  | 		a.attname AS column_name,
+atlasdev-1  | 		(a.attname <> '' AND idx.indnatts > idx.indnkeyatts AND idx.ord > idx.indnkeyatts) AS included,
+atlasdev-1  | 		idx.indisprimary AS primary,
+atlasdev-1  | 		idx.indisunique AS unique,
+atlasdev-1  | 		(CASE WHEN idx.indisexclusion THEN (SELECT conexclop[idx.ord]::regoper FROM pg_constraint WHERE conindid = idx.indexrelid) END) AS excoper,
+atlasdev-1  | 		con.nameconsts AS constraints,
+atlasdev-1  | 		pg_get_expr(idx.indpred, idx.indrelid) AS predicate,
+atlasdev-1  | 		pg_get_indexdef(idx.indexrelid, idx.ord, false) AS expression,
+atlasdev-1  | 		pg_index_column_has_property(idx.indexrelid, idx.ord, 'desc') AS isdesc,
+atlasdev-1  | 		pg_index_column_has_property(idx.indexrelid, idx.ord, 'nulls_first') AS nulls_first,
+atlasdev-1  | 		pg_index_column_has_property(idx.indexrelid, idx.ord, 'nulls_last') AS nulls_last,
+atlasdev-1  | 		obj_description(i.oid, 'pg_class') AS comment,
+atlasdev-1  | 		i.reloptions AS options,
+atlasdev-1  | 		op.opcname AS opclass_name,
+atlasdev-1  | 		op.opcnamespace::regnamespace::text AS opclass_schema,
+atlasdev-1  | 		op.opcdefault AS opclass_default,
+atlasdev-1  | 		a2.attoptions AS opclass_params,
+atlasdev-1  | 	    idx.indnullsnotdistinct AS indnullsnotdistinct
+atlasdev-1  | 	FROM
+atlasdev-1  | 		(
+atlasdev-1  | 			select
+atlasdev-1  | 				*,
+atlasdev-1  | 				generate_series(1,array_length(i.indkey,1)) as ord,
+atlasdev-1  | 				unnest(i.indkey) AS key
+atlasdev-1  | 			from pg_index i
+atlasdev-1  | 		) idx
+atlasdev-1  | 		JOIN pg_class i ON i.oid = idx.indexrelid
+atlasdev-1  | 		JOIN pg_class t ON t.oid = idx.indrelid
+atlasdev-1  | 		JOIN pg_namespace n ON n.oid = t.relnamespace
+atlasdev-1  | 		LEFT JOIN (
+atlasdev-1  | 		    select
+atlasdev-1  | 		    	conindid,
+atlasdev-1  | 				jsonb_object_agg(conname, jsonb_build_object('contype', contype, 'condeferrable', condeferrable, 'condeferred', condeferred)) AS nameconsts
+atlasdev-1  | 		    from pg_constraint
+atlasdev-1  | 		    group by conindid
+atlasdev-1  | 		) con ON con.conindid = idx.indexrelid
+atlasdev-1  | 		LEFT JOIN pg_attribute a ON (a.attrelid, a.attnum) = (idx.indrelid, idx.key)
+atlasdev-1  | 		JOIN pg_am am ON am.oid = i.relam
+atlasdev-1  | 		LEFT JOIN pg_opclass op ON op.oid = idx.indclass[idx.ord-1]
+atlasdev-1  | 		LEFT JOIN pg_attribute a2 ON (a2.attrelid, a2.attnum) = (idx.indexrelid, idx.ord)
+atlasdev-1  | 	WHERE
+atlasdev-1  | 		n.nspname = $1
+atlasdev-1  | 		AND t.relname IN ($2)
+atlasdev-1  | 	ORDER BY
+atlasdev-1  | 		table_name, index_name, idx.ord
+atlasdev-1  | 	
+atlasdev-1  | 2025-03-17 23:08:02.518 UTC [34] DETAIL:  parameters: $1 = 'myschema', $2 = 'users'
+atlasdev-1  | 2025-03-17 23:08:02.519 UTC [34] LOG:  execute <unnamed>: 
+atlasdev-1  | 	SELECT 
+atlasdev-1  | 	    fk.constraint_name,
+atlasdev-1  | 	    fk.table_name,
+atlasdev-1  | 	    a1.attname AS column_name,
+atlasdev-1  | 	    fk.schema_name,
+atlasdev-1  | 	    fk.referenced_table_name,
+atlasdev-1  | 	    a2.attname AS referenced_column_name,
+atlasdev-1  | 	    fk.referenced_schema_name,
+atlasdev-1  | 	    fk.confupdtype,
+atlasdev-1  | 	    fk.confdeltype,
+atlasdev-1  | 	    fk.condeferrable,
+atlasdev-1  | 	    fk.condeferred
+atlasdev-1  | 		FROM 
+atlasdev-1  | 		    (
+atlasdev-1  | 		    	SELECT
+atlasdev-1  | 		      		con.conname AS constraint_name,
+atlasdev-1  | 		      		con.conrelid,
+atlasdev-1  | 		      		con.confrelid,
+atlasdev-1  | 		      		t1.relname AS table_name,
+atlasdev-1  | 		      		ns1.nspname AS schema_name,
+atlasdev-1  | 	      			t2.relname AS referenced_table_name,
+atlasdev-1  | 		      		ns2.nspname AS referenced_schema_name,
+atlasdev-1  | 		      		generate_series(1,array_length(con.conkey,1)) as ord,
+atlasdev-1  | 		      		unnest(con.conkey) AS conkey,
+atlasdev-1  | 		      		unnest(con.confkey) AS confkey,
+atlasdev-1  | 		      		con.confupdtype,
+atlasdev-1  | 		      		con.confdeltype,
+atlasdev-1  | 		      		con.condeferrable,
+atlasdev-1  | 		      		con.condeferred
+atlasdev-1  | 		    	FROM pg_constraint con
+atlasdev-1  | 		    	JOIN pg_class t1 ON t1.oid = con.conrelid
+atlasdev-1  | 		    	JOIN pg_class t2 ON t2.oid = con.confrelid
+atlasdev-1  | 		    	JOIN pg_namespace ns1 on t1.relnamespace = ns1.oid
+atlasdev-1  | 		    	JOIN pg_namespace ns2 on t2.relnamespace = ns2.oid
+atlasdev-1  | 		    	WHERE ns1.nspname = $1
+atlasdev-1  | 		    	AND t1.relname IN ($2)
+atlasdev-1  | 		    	AND con.contype = 'f'
+atlasdev-1  | 		) AS fk
+atlasdev-1  | 		JOIN pg_attribute a1 ON a1.attnum = fk.conkey AND a1.attrelid = fk.conrelid
+atlasdev-1  | 		JOIN pg_attribute a2 ON a2.attnum = fk.confkey AND a2.attrelid = fk.confrelid
+atlasdev-1  | 		ORDER BY
+atlasdev-1  | 		    fk.conrelid, fk.constraint_name, fk.ord
+atlasdev-1  | 	
+atlasdev-1  | 2025-03-17 23:08:02.519 UTC [34] DETAIL:  parameters: $1 = 'myschema', $2 = 'users'
+atlasdev-1  | 2025-03-17 23:08:02.520 UTC [34] LOG:  execute <unnamed>: 
+atlasdev-1  | 	SELECT
+atlasdev-1  | 		rel.relname AS table_name,
+atlasdev-1  | 		t1.conname AS constraint_name,
+atlasdev-1  | 		pg_get_expr(t1.conbin, t1.conrelid) as expression,
+atlasdev-1  | 		t2.attname as column_name,
+atlasdev-1  | 		t1.conkey as column_indexes,
+atlasdev-1  | 		t1.connoinherit as no_inherit
+atlasdev-1  | 	FROM
+atlasdev-1  | 		pg_constraint t1
+atlasdev-1  | 		JOIN pg_attribute t2
+atlasdev-1  | 		ON t2.attrelid = t1.conrelid
+atlasdev-1  | 		AND t2.attnum = ANY (t1.conkey)
+atlasdev-1  | 		JOIN pg_class rel
+atlasdev-1  | 		ON rel.oid = t1.conrelid
+atlasdev-1  | 		JOIN pg_namespace nsp
+atlasdev-1  | 		ON nsp.oid = t1.connamespace
+atlasdev-1  | 	WHERE
+atlasdev-1  | 		t1.contype = 'c'
+atlasdev-1  | 		AND nsp.nspname = $1
+atlasdev-1  | 		AND rel.relname IN ($2)
+atlasdev-1  | 	ORDER BY
+atlasdev-1  | 		t1.conname, array_position(t1.conkey, t2.attnum)
+atlasdev-1  | 	
+atlasdev-1  | 2025-03-17 23:08:02.520 UTC [34] DETAIL:  parameters: $1 = 'myschema', $2 = 'users'
+atlasdev-1  | 2025-03-17 23:08:02.522 UTC [34] LOG:  statement: DROP TABLE IF EXISTS "myschema"."users" CASCADE
+atlasdev-1  | 2025-03-17 23:08:02.523 UTC [34] LOG:  execute <unnamed>: 
+atlasdev-1  | 	SELECT
+atlasdev-1  | 		nspname AS schema_name,
+atlasdev-1  | 		pg_catalog.obj_description(ns.oid) AS comment
+atlasdev-1  | 	FROM
+atlasdev-1  | 		pg_catalog.pg_namespace ns
+atlasdev-1  | 		LEFT JOIN pg_depend AS dep ON dep.classid = 'pg_catalog.pg_namespace'::regclass::oid AND dep.objid = ns.oid AND dep.deptype = 'e'
+atlasdev-1  | 	WHERE
+atlasdev-1  | 		nspname = $1
+atlasdev-1  | 		AND dep.objid IS NULL
+atlasdev-1  | 	ORDER BY
+atlasdev-1  | 	    nspname
+atlasdev-1  | 2025-03-17 23:08:02.523 UTC [34] DETAIL:  parameters: $1 = 'myschema'
+atlasdev-1  | 2025-03-17 23:08:02.524 UTC [34] LOG:  execute <unnamed>: 
+atlasdev-1  | 	SELECT
+atlasdev-1  | 		n.nspname AS schema_name,
+atlasdev-1  | 		e.enumtypid AS enum_id,
+atlasdev-1  | 		t.typname AS enum_name,
+atlasdev-1  | 		e.enumlabel AS enum_value
+atlasdev-1  | 	FROM
+atlasdev-1  | 		pg_enum e
+atlasdev-1  | 		JOIN pg_type t ON e.enumtypid = t.oid
+atlasdev-1  | 		JOIN pg_namespace n ON t.typnamespace = n.oid
+atlasdev-1  | 	WHERE
+atlasdev-1  | 	    n.nspname IN ($1)
+atlasdev-1  | 	ORDER BY
+atlasdev-1  | 	    n.nspname, e.enumtypid, e.enumsortorder
+atlasdev-1  | 	
+atlasdev-1  | 2025-03-17 23:08:02.524 UTC [34] DETAIL:  parameters: $1 = 'myschema'
+atlasdev-1  | 2025-03-17 23:08:02.525 UTC [34] LOG:  execute <unnamed>: 
+atlasdev-1  | 	SELECT
+atlasdev-1  | 		t3.oid,
+atlasdev-1  | 		t1.table_schema,
+atlasdev-1  | 		t1.table_name,
+atlasdev-1  | 		pg_catalog.obj_description(t3.oid, 'pg_class') AS comment,
+atlasdev-1  | 		t4.partattrs AS partition_attrs,
+atlasdev-1  | 		t4.partstrat AS partition_strategy,
+atlasdev-1  | 		pg_get_expr(t4.partexprs, t4.partrelid) AS partition_exprs,
+atlasdev-1  | 		json_build_object('row_security', t3.relrowsecurity, 'force_row_security', t3.relforcerowsecurity) AS attrs
+atlasdev-1  | 	FROM
+atlasdev-1  | 		INFORMATION_SCHEMA.TABLES AS t1
+atlasdev-1  | 		JOIN pg_catalog.pg_namespace AS t2 ON t2.nspname = t1.table_schema
+atlasdev-1  | 		JOIN pg_catalog.pg_class AS t3 ON t3.relnamespace = t2.oid AND t3.relname = t1.table_name
+atlasdev-1  | 		LEFT JOIN pg_catalog.pg_partitioned_table AS t4 ON t4.partrelid = t3.oid
+atlasdev-1  | 		LEFT JOIN pg_depend AS t5 ON t5.classid = 'pg_catalog.pg_class'::regclass::oid AND t5.objid = t3.oid AND t5.deptype = 'e'
+atlasdev-1  | 	WHERE
+atlasdev-1  | 		t1.table_type = 'BASE TABLE'
+atlasdev-1  | 		AND NOT COALESCE(t3.relispartition, false)
+atlasdev-1  | 		AND t1.table_schema IN ($1)
+atlasdev-1  | 		AND t5.objid IS NULL
+atlasdev-1  | 	ORDER BY
+atlasdev-1  | 		t1.table_schema, t1.table_name
+atlasdev-1  | 	
+atlasdev-1  | 2025-03-17 23:08:02.525 UTC [34] DETAIL:  parameters: $1 = 'myschema'
+atlasdev-1  | 2025-03-17 23:08:02.526 UTC [34] LOG:  execute <unnamed>: 
+atlasdev-1  | 	SELECT
+atlasdev-1  | 		nspname AS schema_name,
+atlasdev-1  | 		pg_catalog.obj_description(ns.oid) AS comment
+atlasdev-1  | 	FROM
+atlasdev-1  | 		pg_catalog.pg_namespace ns
+atlasdev-1  | 		LEFT JOIN pg_depend AS dep ON dep.classid = 'pg_catalog.pg_namespace'::regclass::oid AND dep.objid = ns.oid AND dep.deptype = 'e'
+atlasdev-1  | 	WHERE
+atlasdev-1  | 		nspname = $1
+atlasdev-1  | 		AND dep.objid IS NULL
+atlasdev-1  | 	ORDER BY
+atlasdev-1  | 	    nspname
+atlasdev-1  | 2025-03-17 23:08:02.526 UTC [34] DETAIL:  parameters: $1 = 'myschema'
+atlasdev-1  | 2025-03-17 23:08:02.527 UTC [34] LOG:  execute <unnamed>: 
+atlasdev-1  | 	SELECT
+atlasdev-1  | 		n.nspname AS schema_name,
+atlasdev-1  | 		e.enumtypid AS enum_id,
+atlasdev-1  | 		t.typname AS enum_name,
+atlasdev-1  | 		e.enumlabel AS enum_value
+atlasdev-1  | 	FROM
+atlasdev-1  | 		pg_enum e
+atlasdev-1  | 		JOIN pg_type t ON e.enumtypid = t.oid
+atlasdev-1  | 		JOIN pg_namespace n ON t.typnamespace = n.oid
+atlasdev-1  | 	WHERE
+atlasdev-1  | 	    n.nspname IN ($1)
+atlasdev-1  | 	ORDER BY
+atlasdev-1  | 	    n.nspname, e.enumtypid, e.enumsortorder
+atlasdev-1  | 	
+atlasdev-1  | 2025-03-17 23:08:02.527 UTC [34] DETAIL:  parameters: $1 = 'myschema'
+atlasdev-1  | 2025-03-17 23:08:02.528 UTC [34] LOG:  execute <unnamed>: 
+atlasdev-1  | 	SELECT
+atlasdev-1  | 		t3.oid,
+atlasdev-1  | 		t1.table_schema,
+atlasdev-1  | 		t1.table_name,
+atlasdev-1  | 		pg_catalog.obj_description(t3.oid, 'pg_class') AS comment,
+atlasdev-1  | 		t4.partattrs AS partition_attrs,
+atlasdev-1  | 		t4.partstrat AS partition_strategy,
+atlasdev-1  | 		pg_get_expr(t4.partexprs, t4.partrelid) AS partition_exprs,
+atlasdev-1  | 		json_build_object('row_security', t3.relrowsecurity, 'force_row_security', t3.relforcerowsecurity) AS attrs
+atlasdev-1  | 	FROM
+atlasdev-1  | 		INFORMATION_SCHEMA.TABLES AS t1
+atlasdev-1  | 		JOIN pg_catalog.pg_namespace AS t2 ON t2.nspname = t1.table_schema
+atlasdev-1  | 		JOIN pg_catalog.pg_class AS t3 ON t3.relnamespace = t2.oid AND t3.relname = t1.table_name
+atlasdev-1  | 		LEFT JOIN pg_catalog.pg_partitioned_table AS t4 ON t4.partrelid = t3.oid
+atlasdev-1  | 		LEFT JOIN pg_depend AS t5 ON t5.classid = 'pg_catalog.pg_class'::regclass::oid AND t5.objid = t3.oid AND t5.deptype = 'e'
+atlasdev-1  | 	WHERE
+atlasdev-1  | 		t1.table_type = 'BASE TABLE'
+atlasdev-1  | 		AND NOT COALESCE(t3.relispartition, false)
+atlasdev-1  | 		AND t1.table_schema IN ($1)
+atlasdev-1  | 		AND t5.objid IS NULL
+atlasdev-1  | 	ORDER BY
+atlasdev-1  | 		t1.table_schema, t1.table_name
+atlasdev-1  | 	
+atlasdev-1  | 2025-03-17 23:08:02.528 UTC [34] DETAIL:  parameters: $1 = 'myschema'
+atlasdev-1  | 2025-03-17 23:08:02.529 UTC [34] LOG:  statement: CREATE TABLE users (
+atlasdev-1  | 	    id BIGINT GENERATED ALWAYS AS IDENTITY,
+atlasdev-1  | 	    firstname TEXT NOT NULL,
+atlasdev-1  | 	    email TEXT NOT NULL UNIQUE
+atlasdev-1  | 	);
+atlasdev-1  | 2025-03-17 23:08:02.531 UTC [34] LOG:  statement: CREATE DOMAIN "myschema"."verification_status" AS text CONSTRAINT "verification_status_check" CHECK (VALUE = ANY (ARRAY['verified'::text, 'unverified'::text]));
+atlasdev-1  | 2025-03-17 23:08:02.531 UTC [34] ERROR:  type "verification_status" already exists
+atlasdev-1  | 2025-03-17 23:08:02.531 UTC [34] STATEMENT:  CREATE DOMAIN "myschema"."verification_status" AS text CONSTRAINT "verification_status_check" CHECK (VALUE = ANY (ARRAY['verified'::text, 'unverified'::text]));
+atlasdev-1  | 2025-03-17 23:08:02.532 UTC [34] LOG:  execute <unnamed>: 
+atlasdev-1  | 	SELECT
+atlasdev-1  | 		nspname AS schema_name,
+atlasdev-1  | 		pg_catalog.obj_description(ns.oid) AS comment
+atlasdev-1  | 	FROM
+atlasdev-1  | 		pg_catalog.pg_namespace ns
+atlasdev-1  | 		LEFT JOIN pg_depend AS dep ON dep.classid = 'pg_catalog.pg_namespace'::regclass::oid AND dep.objid = ns.oid AND dep.deptype = 'e'
+atlasdev-1  | 	WHERE
+atlasdev-1  | 		nspname = $1
+atlasdev-1  | 		AND dep.objid IS NULL
+atlasdev-1  | 	ORDER BY
+atlasdev-1  | 	    nspname
+atlasdev-1  | 2025-03-17 23:08:02.532 UTC [34] DETAIL:  parameters: $1 = 'myschema'
+atlasdev-1  | 2025-03-17 23:08:02.532 UTC [34] LOG:  execute <unnamed>: 
+atlasdev-1  | 	SELECT
+atlasdev-1  | 		n.nspname AS schema_name,
+atlasdev-1  | 		e.enumtypid AS enum_id,
+atlasdev-1  | 		t.typname AS enum_name,
+atlasdev-1  | 		e.enumlabel AS enum_value
+atlasdev-1  | 	FROM
+atlasdev-1  | 		pg_enum e
+atlasdev-1  | 		JOIN pg_type t ON e.enumtypid = t.oid
+atlasdev-1  | 		JOIN pg_namespace n ON t.typnamespace = n.oid
+atlasdev-1  | 	WHERE
+atlasdev-1  | 	    n.nspname IN ($1)
+atlasdev-1  | 	ORDER BY
+atlasdev-1  | 	    n.nspname, e.enumtypid, e.enumsortorder
+atlasdev-1  | 	
+atlasdev-1  | 2025-03-17 23:08:02.532 UTC [34] DETAIL:  parameters: $1 = 'myschema'
+atlasdev-1  | 2025-03-17 23:08:02.534 UTC [34] LOG:  execute <unnamed>: 
+atlasdev-1  | 	SELECT
+atlasdev-1  | 		t3.oid,
+atlasdev-1  | 		t1.table_schema,
+atlasdev-1  | 		t1.table_name,
+atlasdev-1  | 		pg_catalog.obj_description(t3.oid, 'pg_class') AS comment,
+atlasdev-1  | 		t4.partattrs AS partition_attrs,
+atlasdev-1  | 		t4.partstrat AS partition_strategy,
+atlasdev-1  | 		pg_get_expr(t4.partexprs, t4.partrelid) AS partition_exprs,
+atlasdev-1  | 		json_build_object('row_security', t3.relrowsecurity, 'force_row_security', t3.relforcerowsecurity) AS attrs
+atlasdev-1  | 	FROM
+atlasdev-1  | 		INFORMATION_SCHEMA.TABLES AS t1
+atlasdev-1  | 		JOIN pg_catalog.pg_namespace AS t2 ON t2.nspname = t1.table_schema
+atlasdev-1  | 		JOIN pg_catalog.pg_class AS t3 ON t3.relnamespace = t2.oid AND t3.relname = t1.table_name
+atlasdev-1  | 		LEFT JOIN pg_catalog.pg_partitioned_table AS t4 ON t4.partrelid = t3.oid
+atlasdev-1  | 		LEFT JOIN pg_depend AS t5 ON t5.classid = 'pg_catalog.pg_class'::regclass::oid AND t5.objid = t3.oid AND t5.deptype = 'e'
+atlasdev-1  | 	WHERE
+atlasdev-1  | 		t1.table_type = 'BASE TABLE'
+atlasdev-1  | 		AND NOT COALESCE(t3.relispartition, false)
+atlasdev-1  | 		AND t1.table_schema IN ($1)
+atlasdev-1  | 		AND t5.objid IS NULL
+atlasdev-1  | 	ORDER BY
+atlasdev-1  | 		t1.table_schema, t1.table_name
+atlasdev-1  | 	
+atlasdev-1  | 2025-03-17 23:08:02.534 UTC [34] DETAIL:  parameters: $1 = 'myschema'
+atlasdev-1  | 2025-03-17 23:08:02.537 UTC [34] LOG:  execute <unnamed>: 
+atlasdev-1  | 	SELECT
+atlasdev-1  | 		t1.table_name,
+atlasdev-1  | 		t1.column_name,
+atlasdev-1  | 		t1.data_type,
+atlasdev-1  | 		pg_catalog.format_type(a.atttypid, a.atttypmod) AS format_type,
+atlasdev-1  | 		t1.is_nullable,
+atlasdev-1  | 		t1.column_default,
+atlasdev-1  | 		t1.character_maximum_length,
+atlasdev-1  | 		t1.numeric_precision,
+atlasdev-1  | 		t1.datetime_precision,
+atlasdev-1  | 		t1.numeric_scale,
+atlasdev-1  | 		t1.interval_type,
+atlasdev-1  | 		t1.character_set_name,
+atlasdev-1  | 		t1.collation_name,
+atlasdev-1  | 		t1.is_identity,
+atlasdev-1  | 		t1.identity_start,
+atlasdev-1  | 		t1.identity_increment,
+atlasdev-1  | 		(CASE WHEN t1.is_identity = 'YES' THEN (SELECT last_value FROM pg_sequences WHERE quote_ident(schemaname) || '.' || quote_ident(sequencename) = pg_get_serial_sequence(quote_ident(t1.table_schema) || '.' || quote_ident(t1.table_name), t1.column_name)) END) AS identity_last,
+atlasdev-1  | 		t1.identity_generation,
+atlasdev-1  | 		t1.generation_expression,
+atlasdev-1  | 		col_description(t3.oid, "ordinal_position") AS comment,
+atlasdev-1  | 		t4.typtype,
+atlasdev-1  | 		t4.typelem,
+atlasdev-1  | 		t4.oid
+atlasdev-1  | 	FROM
+atlasdev-1  | 		"information_schema"."columns" AS t1
+atlasdev-1  | 		JOIN pg_catalog.pg_namespace AS t2 ON t2.nspname = t1.table_schema
+atlasdev-1  | 		JOIN pg_catalog.pg_class AS t3 ON t3.relnamespace = t2.oid AND t3.relname = t1.table_name
+atlasdev-1  | 		JOIN pg_catalog.pg_attribute AS a ON a.attrelid = t3.oid AND a.attname = t1.column_name
+atlasdev-1  | 		LEFT JOIN pg_catalog.pg_type AS t4 ON t4.oid = a.atttypid
+atlasdev-1  | 	WHERE
+atlasdev-1  | 		t1.table_schema = $1 AND t1.table_name IN ($2)
+atlasdev-1  | 	ORDER BY
+atlasdev-1  | 		t1.table_name, t1.ordinal_position
+atlasdev-1  | 	
+atlasdev-1  | 2025-03-17 23:08:02.537 UTC [34] DETAIL:  parameters: $1 = 'myschema', $2 = 'users'
+atlasdev-1  | 2025-03-17 23:08:02.539 UTC [34] LOG:  execute <unnamed>: 
+atlasdev-1  | 	SELECT
+atlasdev-1  | 		t.relname AS table_name,
+atlasdev-1  | 		i.relname AS index_name,
+atlasdev-1  | 		am.amname AS index_type,
+atlasdev-1  | 		a.attname AS column_name,
+atlasdev-1  | 		(a.attname <> '' AND idx.indnatts > idx.indnkeyatts AND idx.ord > idx.indnkeyatts) AS included,
+atlasdev-1  | 		idx.indisprimary AS primary,
+atlasdev-1  | 		idx.indisunique AS unique,
+atlasdev-1  | 		(CASE WHEN idx.indisexclusion THEN (SELECT conexclop[idx.ord]::regoper FROM pg_constraint WHERE conindid = idx.indexrelid) END) AS excoper,
+atlasdev-1  | 		con.nameconsts AS constraints,
+atlasdev-1  | 		pg_get_expr(idx.indpred, idx.indrelid) AS predicate,
+atlasdev-1  | 		pg_get_indexdef(idx.indexrelid, idx.ord, false) AS expression,
+atlasdev-1  | 		pg_index_column_has_property(idx.indexrelid, idx.ord, 'desc') AS isdesc,
+atlasdev-1  | 		pg_index_column_has_property(idx.indexrelid, idx.ord, 'nulls_first') AS nulls_first,
+atlasdev-1  | 		pg_index_column_has_property(idx.indexrelid, idx.ord, 'nulls_last') AS nulls_last,
+atlasdev-1  | 		obj_description(i.oid, 'pg_class') AS comment,
+atlasdev-1  | 		i.reloptions AS options,
+atlasdev-1  | 		op.opcname AS opclass_name,
+atlasdev-1  | 		op.opcnamespace::regnamespace::text AS opclass_schema,
+atlasdev-1  | 		op.opcdefault AS opclass_default,
+atlasdev-1  | 		a2.attoptions AS opclass_params,
+atlasdev-1  | 	    idx.indnullsnotdistinct AS indnullsnotdistinct
+atlasdev-1  | 	FROM
+atlasdev-1  | 		(
+atlasdev-1  | 			select
+atlasdev-1  | 				*,
+atlasdev-1  | 				generate_series(1,array_length(i.indkey,1)) as ord,
+atlasdev-1  | 				unnest(i.indkey) AS key
+atlasdev-1  | 			from pg_index i
+atlasdev-1  | 		) idx
+atlasdev-1  | 		JOIN pg_class i ON i.oid = idx.indexrelid
+atlasdev-1  | 		JOIN pg_class t ON t.oid = idx.indrelid
+atlasdev-1  | 		JOIN pg_namespace n ON n.oid = t.relnamespace
+atlasdev-1  | 		LEFT JOIN (
+atlasdev-1  | 		    select
+atlasdev-1  | 		    	conindid,
+atlasdev-1  | 				jsonb_object_agg(conname, jsonb_build_object('contype', contype, 'condeferrable', condeferrable, 'condeferred', condeferred)) AS nameconsts
+atlasdev-1  | 		    from pg_constraint
+atlasdev-1  | 		    group by conindid
+atlasdev-1  | 		) con ON con.conindid = idx.indexrelid
+atlasdev-1  | 		LEFT JOIN pg_attribute a ON (a.attrelid, a.attnum) = (idx.indrelid, idx.key)
+atlasdev-1  | 		JOIN pg_am am ON am.oid = i.relam
+atlasdev-1  | 		LEFT JOIN pg_opclass op ON op.oid = idx.indclass[idx.ord-1]
+atlasdev-1  | 		LEFT JOIN pg_attribute a2 ON (a2.attrelid, a2.attnum) = (idx.indexrelid, idx.ord)
+atlasdev-1  | 	WHERE
+atlasdev-1  | 		n.nspname = $1
+atlasdev-1  | 		AND t.relname IN ($2)
+atlasdev-1  | 	ORDER BY
+atlasdev-1  | 		table_name, index_name, idx.ord
+atlasdev-1  | 	
+atlasdev-1  | 2025-03-17 23:08:02.539 UTC [34] DETAIL:  parameters: $1 = 'myschema', $2 = 'users'
+atlasdev-1  | 2025-03-17 23:08:02.540 UTC [34] LOG:  execute <unnamed>: 
+atlasdev-1  | 	SELECT 
+atlasdev-1  | 	    fk.constraint_name,
+atlasdev-1  | 	    fk.table_name,
+atlasdev-1  | 	    a1.attname AS column_name,
+atlasdev-1  | 	    fk.schema_name,
+atlasdev-1  | 	    fk.referenced_table_name,
+atlasdev-1  | 	    a2.attname AS referenced_column_name,
+atlasdev-1  | 	    fk.referenced_schema_name,
+atlasdev-1  | 	    fk.confupdtype,
+atlasdev-1  | 	    fk.confdeltype,
+atlasdev-1  | 	    fk.condeferrable,
+atlasdev-1  | 	    fk.condeferred
+atlasdev-1  | 		FROM 
+atlasdev-1  | 		    (
+atlasdev-1  | 		    	SELECT
+atlasdev-1  | 		      		con.conname AS constraint_name,
+atlasdev-1  | 		      		con.conrelid,
+atlasdev-1  | 		      		con.confrelid,
+atlasdev-1  | 		      		t1.relname AS table_name,
+atlasdev-1  | 		      		ns1.nspname AS schema_name,
+atlasdev-1  | 	      			t2.relname AS referenced_table_name,
+atlasdev-1  | 		      		ns2.nspname AS referenced_schema_name,
+atlasdev-1  | 		      		generate_series(1,array_length(con.conkey,1)) as ord,
+atlasdev-1  | 		      		unnest(con.conkey) AS conkey,
+atlasdev-1  | 		      		unnest(con.confkey) AS confkey,
+atlasdev-1  | 		      		con.confupdtype,
+atlasdev-1  | 		      		con.confdeltype,
+atlasdev-1  | 		      		con.condeferrable,
+atlasdev-1  | 		      		con.condeferred
+atlasdev-1  | 		    	FROM pg_constraint con
+atlasdev-1  | 		    	JOIN pg_class t1 ON t1.oid = con.conrelid
+atlasdev-1  | 		    	JOIN pg_class t2 ON t2.oid = con.confrelid
+atlasdev-1  | 		    	JOIN pg_namespace ns1 on t1.relnamespace = ns1.oid
+atlasdev-1  | 		    	JOIN pg_namespace ns2 on t2.relnamespace = ns2.oid
+atlasdev-1  | 		    	WHERE ns1.nspname = $1
+atlasdev-1  | 		    	AND t1.relname IN ($2)
+atlasdev-1  | 		    	AND con.contype = 'f'
+atlasdev-1  | 		) AS fk
+atlasdev-1  | 		JOIN pg_attribute a1 ON a1.attnum = fk.conkey AND a1.attrelid = fk.conrelid
+atlasdev-1  | 		JOIN pg_attribute a2 ON a2.attnum = fk.confkey AND a2.attrelid = fk.confrelid
+atlasdev-1  | 		ORDER BY
+atlasdev-1  | 		    fk.conrelid, fk.constraint_name, fk.ord
+atlasdev-1  | 	
+atlasdev-1  | 2025-03-17 23:08:02.540 UTC [34] DETAIL:  parameters: $1 = 'myschema', $2 = 'users'
+atlasdev-1  | 2025-03-17 23:08:02.541 UTC [34] LOG:  execute <unnamed>: 
+atlasdev-1  | 	SELECT
+atlasdev-1  | 		rel.relname AS table_name,
+atlasdev-1  | 		t1.conname AS constraint_name,
+atlasdev-1  | 		pg_get_expr(t1.conbin, t1.conrelid) as expression,
+atlasdev-1  | 		t2.attname as column_name,
+atlasdev-1  | 		t1.conkey as column_indexes,
+atlasdev-1  | 		t1.connoinherit as no_inherit
+atlasdev-1  | 	FROM
+atlasdev-1  | 		pg_constraint t1
+atlasdev-1  | 		JOIN pg_attribute t2
+atlasdev-1  | 		ON t2.attrelid = t1.conrelid
+atlasdev-1  | 		AND t2.attnum = ANY (t1.conkey)
+atlasdev-1  | 		JOIN pg_class rel
+atlasdev-1  | 		ON rel.oid = t1.conrelid
+atlasdev-1  | 		JOIN pg_namespace nsp
+atlasdev-1  | 		ON nsp.oid = t1.connamespace
+atlasdev-1  | 	WHERE
+atlasdev-1  | 		t1.contype = 'c'
+atlasdev-1  | 		AND nsp.nspname = $1
+atlasdev-1  | 		AND rel.relname IN ($2)
+atlasdev-1  | 	ORDER BY
+atlasdev-1  | 		t1.conname, array_position(t1.conkey, t2.attnum)
+atlasdev-1  | 	
+atlasdev-1  | 2025-03-17 23:08:02.541 UTC [34] DETAIL:  parameters: $1 = 'myschema', $2 = 'users'
+atlasdev-1  | 2025-03-17 23:08:02.541 UTC [34] LOG:  statement: DROP TABLE IF EXISTS "myschema"."users" CASCADE
+atlasdev-1  | 2025-03-17 23:08:02.542 UTC [33] LOG:  execute <unnamed>: SELECT pg_advisory_unlock($1)
+atlasdev-1  | 2025-03-17 23:08:02.542 UTC [33] DETAIL:  parameters: $1 = '361947982'

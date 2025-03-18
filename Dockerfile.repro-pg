@@ -1,0 +1,9 @@
+FROM postgres:15.1
+
+COPY ./initdb.sh /docker-entrypoint-initdb.d
+
+COPY ./pg_hba.conf /mnt/pg_hba/pg_hba.conf
+RUN chown postgres:postgres /mnt/pg_hba/pg_hba.conf
+
+COPY ./scripts /mnt/scripts
+RUN chown -R postgres:postgres /mnt/scripts
