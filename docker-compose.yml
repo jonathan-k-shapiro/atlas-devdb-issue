@@ -1,7 +1,9 @@
 services:
 
   postgres:
-    image: repro-pg
+    build:
+      context: .
+      dockerfile: Dockerfile.repro-pg
     environment:
       - "POSTGRES_PASSWORD=postgres"
       - "PGUSER=postgres"
@@ -15,7 +17,9 @@ services:
       retries: 40
 
   atlasdev:
-    image: repro-pg-atlasdev
+    build:
+      context: .
+      dockerfile: Dockerfile.repro-pg
     command: ["postgres", "-c", "log_statement=all"]
     environment:
       - "POSTGRES_PASSWORD=postgres"
