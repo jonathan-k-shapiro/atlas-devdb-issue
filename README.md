@@ -5,10 +5,9 @@ after upgrading atlasgo from v0.28 to v0.32.
 
 ## Steps to reproduce
 
-1. Build a docker images for postgres with `docker build -t repro-pg -f Dockerfile.repro-pg .` and `docker build -t repro-pg-atlasdev -f Dockerfile.repro-pg-atlasdev .`
-2. Bring up our setup in docker compose with `docker compose up --build -d`
-3. Run `atlas migrate diff --env host`  THIS IS WHERE YOU SHOULD SEE AN ERROR!
-4. Capture postgres logs with `docker compose logs atlasdev > atlasdev.log`
+1. Bring up our setup in docker compose with `docker compose up --build -d`
+2. Run `atlas migrate diff --env host`  THIS IS WHERE YOU SHOULD SEE AN ERROR!
+3. Capture postgres logs with `docker compose logs atlasdev > atlasdev.log`
 
 ## The error you should see
 
