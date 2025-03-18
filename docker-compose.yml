@@ -15,7 +15,7 @@ services:
       retries: 40
 
   atlasdev:
-    image: repro-pg
+    image: repro-pg-atlasdev
     command: ["postgres", "-c", "log_statement=all"]
     environment:
       - "POSTGRES_PASSWORD=postgres"
